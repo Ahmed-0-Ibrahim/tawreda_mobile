@@ -1,0 +1,61 @@
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Modal, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Button } from "./Button";
+import { Text } from "./Text"; 
+import { scale, scaledHeight, scaledWidth } from "../Utils/responsiveUtils";
+import colors from "../Utils/colors";
+import { Icon } from "./Icon";
+
+
+export const MadelLogin = (props) => {
+
+
+    const { t, i18n } = useTranslation();
+
+
+
+    return (
+        <Modal visible={props.visible} animationType="none" transparent={true}>
+            <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }} onPress={() => {
+                props.dismiss();
+            }}>
+                <TouchableWithoutFeedback>
+                    <View style={{
+                        alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center', borderTopRightRadius: scale(20), borderTopLeftRadius: scale(20),
+                        paddingHorizontal: scale(10), paddingVertical: scale(15), backgroundColor: colors.grayBackgroung,
+                    }}>
+                        <View style={{ flexDirection: 'row', justifyContent: "space-between", width: scaledWidth(90), alignContent: 'center', alignItems: "center" }}>
+                            <TouchableOpacity style={{
+                                alignItems: 'center', justifyContent: 'center',
+                                width: scaledWidth(8), height: scaledWidth(8), borderRadius: scaledWidth(8) / 2, backgroundColor: 'rgba(118, 118, 128, 0.12)'
+                            }} onPress={() => {
+                                props.dismiss();
+                            }}>
+                                <Icon name="close" type="IonIcons" size={9.5} color={colors.MainBlue} />
+                            </TouchableOpacity>
+                            <Icon name="close" type="IonIcons" size={0} />
+                        </View>
+
+
+                        <View style={{ height: scaledHeight(15), width: scaledWidth(95), marginVertical: scale(2), alignItems: 'center' }}>
+                            {/* <Button linear circle={20} style={{ marginTop: -15, }} activeOpacity={1}  >
+                                {props.close ? <Icon name="close-sharp" type="IonIcons" size={20} /> :
+                                    <Icon name="refresh-ccw" type="Feather" size={20} />}
+                            </Button> */}
+                            <Text color={'#CA944B'} bold size={8}>{t("loginfirst")}</Text>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', borderColor: colors.MainBlue, borderWidth: scale(3), padding: scale(5), borderRadius: scale(50), marginTop: scale(18) }}>
+                                <Button radius={25} backgroundColor={colors.MainBlue} elevation={2} style={{ paddingHorizontal: scale(60),height: scaledHeight(5), }} onPress={
+                                    props.method
+                                }>
+                                    <Text style={{ marginHorizontal: scale(7) }} bold size={8.5} color="white">{t('login')}</Text>
+                                </Button>
+                            </View>
+                        </View>
+                        <View style={{ height: scaledHeight(8), }} />
+                    </View>
+                </TouchableWithoutFeedback>
+            </TouchableOpacity>
+        </Modal>
+    );
+}
